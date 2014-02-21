@@ -26,54 +26,69 @@ describe('scrabble', function(){
   it('returns 43 for "adbfkjqq"', function(){
     scrabble("adbfkjqq").should.equal(43);
   });
-});
-
-describe('onePoint', function(){
-  it('returns 1 for a', function(){
-    onePoint("a").should.equal(1);
-  });
-  it('returns 2 for ae', function(){
-    onePoint("ae").should.equal(2);
+  it('returns 0 for an empty string', function() {
+    scrabble("").should.equal(0);
   });
 });
 
-describe('twoPoint', function(){
-  it('returns 2 for a word with a d', function(){
-    twoPoint("ada").should.equal(2);
+describe("nPointScore", function(){
+  it('returns the score at the nth position of the regular expression object', function(){
+    nPointScore("a", /[aeiou]/gi, 1).should.equal(1);
   });
-  it('returns 4 for a word with a d and a g', function(){
-    twoPoint("dog").should.equal(4);
+  it('returns the score at the nth position of the regular expression object', function(){
+    nPointScore("ae", /[aeiou]/gi, 1).should.equal(2);
   });
-});
-
-describe('threePoint', function(){
-  it('returns 3 for a word with a b', function(){
-    threePoint("aba").should.equal(3);
+  it('returns the score at the nth position of the regular expression object', function(){
+    nPointScore("d", /[dg]/gi, 2).should.equal(2);
   });
 });
 
+// describe('onePoint', function(){
+//   it('returns 1 for a', function(){
+//     onePoint("a").should.equal(1);
+//   });
+//   it('returns 2 for ae', function(){
+//     onePoint("ae").should.equal(2);
+//   });
+// });
 
-describe('fourPoint', function(){
-  it('returns 4 for a word with v', function(){
-    fourPoint("v").should.equal(4);
-  });
-});
+// describe('twoPoint', function(){
+//   it('returns 2 for a word with a d', function(){
+//     twoPoint("ada").should.equal(2);
+//   });
+//   it('returns 4 for a word with a d and a g', function(){
+//     twoPoint("dog").should.equal(4);
+//   });
+// });
+
+// describe('threePoint', function(){
+//   it('returns 3 for a word with a b', function(){
+//     threePoint("aba").should.equal(3);
+//   });
+// });
 
 
-describe('fivePoint', function(){
-  it('returns 5 for a word with k', function(){
-    fivePoint("k").should.equal(5);
-  });
-});
+// describe('fourPoint', function(){
+//   it('returns 4 for a word with v', function(){
+//     fourPoint("v").should.equal(4);
+//   });
+// });
 
-describe('eightPoint', function(){
-  it('returns 8 for a word with x', function(){
-    eightPoint("x").should.equal(8);
-  });
-});
 
-describe('tenPoint', function(){
-  it('returns 10 for a word with z', function(){
-    tenPoint("z").should.equal(10);
-  });
-});
+// describe('fivePoint', function(){
+//   it('returns 5 for a word with k', function(){
+//     fivePoint("k").should.equal(5);
+//   });
+// });
+
+// describe('eightPoint', function(){
+//   it('returns 8 for a word with x', function(){
+//     eightPoint("x").should.equal(8);
+//   });
+// });
+
+// describe('tenPoint', function(){
+//   it('returns 10 for a word with z', function(){
+//     tenPoint("z").should.equal(10);
+//   });
+// });
