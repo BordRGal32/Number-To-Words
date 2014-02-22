@@ -1,108 +1,84 @@
-var scrabble = function(word) {
-  var regExes = {
-    1 : /[aeioulnrst]/gi,
-    2 : /[dg]/gi,
-    3 : /[bcmp]/gi,
-    4 : /[fhvwy]/gi,
-    5 : /[k]/gi,
-    8 : /[jx]/gi,
-    10 : /[qz]/gi
+var numToWords = function(number) {
+ 
+  var threeDigits = [];
+  var threeDigitInWords = [];
+  var largeNumberNames = {
+    0 : "", 
+    1 : " thousand",
+    2 : " million",
+    3 : " billion",
+    4 : " trillion",
+    5 : " quadrillion", 
   };
 
-  var score = 0;
-  for(var propt in regExes) {
-    var value = regExes[propt];
-    score += nPointScore(word, value, propt);
-  };
-  return score;
-  // return var score = onePoint(word) 
-  //   + twoPoint(word) 
-  //   + threePoint(word) 
-  //   + fourPoint(word) 
-  //   + fivePoint(word)
-  //   + eightPoint(word)
-  //   + tenPoint(word);
-};
-
-var nPointScore = function(word, regEx, value) {
-  var results = word.match(regEx);
-  if(results === null){
-    return 0;
-  } else {
-    return results.length * value;
+  while(Math.ceil(number/1000)>0) {
+    threeDigits.push(number % 1000);
+    number = Math.floor(number/1000);
   }
+ 
+  threeDigits.forEach(function(threeDigit) {
+    threeDigitInWords.push(threeDigitToWords(threeDigit));
+  })
+
+  threeDigitInWords.forEach(function(threeDigitInWord, index) {
+    threeDigitInWords[index] += largeNumberNames[index];
+  })
+
+  threeDigitInWords.reverse();
+
+  return threeDigitInWords.join(" ");
+
 };
 
+var threeDigitToWords = function(number) {
+  var words = "";
+  var wordOnesTeens = {  
+  0 : "",
+  1 : "one",
+  2 : "two",
+  3 : "three",
+  4 : "four",
+  5 : "five",
+  6 : "six",
+  7 : "seven",
+  8 : "eight",
+  9 : "nine", 
+  10 : "ten",
+  11 : "eleven",
+  12 : "twelve",
+  13 : "thirteen",
+  14 : "fourteen",
+  15 : "fifteen",
+  16 : "sixteen",
+  17 : "seventeen",
+  18 : "eighteen",
+  19 : "nineteen",
+  };
+  var wordTens = {
+    2 : "twenty",
+    3 : "thirty",
+    4 : "forty",
+    5 : "fifty",
+    6 : "sixty",
+    7 : "seventy",
+    8 : "eighty",
+    9 : "ninety",
+  };
+  if(number > 99) {
+    words += wordOnesTeens[Math.floor(number/100)] + " hundred ";
+    number = number % 100;
+  }
+  if(number >= 20) {
+    words += wordTens[Math.floor(number/10)] + " "
+    number = number % 10;
+  }
+  words += wordOnesTeens[number];
 
-// var onePoint = function(word) {
-//   var onePoints = /[aeioulnrst]/gi;
-//   var onePtResults = word.match(onePoints);
-//   if(onePtResults === null){
-//     return 0;
-//   } else {
-//     return onePtResults.length * 1;
-//   }
-// };
-
-// var twoPoint = function(word) {
-//   var twoPoints = /[dg]/gi;
-//   var twoPtResults = word.match(twoPoints);
-//   if (twoPtResults === null){
-//     return 0;
-//   } else {
-//     return twoPtResults.length * 2;
-//   }
-// };
-// var threePoint = function(word) {
-//   var threePoints = /[bcmp]/gi;
-//   var threePtResults = word.match(threePoints);
-//   if (threePtResults === null){
-//     return 0;
-//   } else {
-//     return threePtResults.length * 3;
-//   }
-// };
-
-// var fourPoint = function(word) {
-//   var fourPoints = /[fhvwy]/gi;
-//   var fourPtResults = word.match(fourPoints);
-//   if (fourPtResults === null){
-//     return 0;
-//   } else {
-//     return fourPtResults.length * 4;
-//   }
-// };
-
-
-// var fivePoint = function(word) {
-//   var fivePoints = /[k]/gi;
-//   var fivePtResults = word.match(fivePoints);
-//   if (fivePtResults === null){
-//     return 0;
-//   } else {
-//     return fivePtResults.length * 5;
-//   }
-// };
-
-// var eightPoint = function(word) {
-//   var eightPoints = /[jx]/gi;
-//   var eightPtResults = word.match(eightPoints);
-//   if (eightPtResults === null){
-//     return 0;
-//   } else {
-//     return eightPtResults.length * 8;
-//   }
-// };
-
-// var tenPoint = function(word) {
-//   var tenPoints = /[qz]/gi;
-//   var tenPtResults = word.match(tenPoints);
-//   if (tenPtResults === null){
-//     return 0;
-//   } else {
-//     return tenPtResults.length * 10;
-//   }
-// };
+  if (words.charAt((words.length)-1) === " ") {
+    words = words.slice(0, -1);
+  }
+  return words; 
+};
 
 $(document).ready(function() {
 

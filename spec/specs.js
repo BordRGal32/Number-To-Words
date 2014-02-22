@@ -1,94 +1,28 @@
-describe('scrabble', function(){
-  it('returns 1 for a', function(){
-    scrabble("a").should.equal(1);
+describe('numToWords', function(){
+  it('should work for single digit numbers', function() {
+    numToWords(1).should.equal("one");
   });
-  it('returns 2 for d', function() {
-    scrabble('d').should.equal(2);
+  it('work for double digit numbers below twenty', function(){
+    numToWords(13).should.equal("thirteen");
   });
-  it('returns 3 for ad', function() {
-    scrabble('ad').should.equal(3);
+  it('should work for double digit numbers above twenty', function() {
+    numToWords(21).should.equal("twenty one");
   });
-  it('returns a 3 for a c', function() {
-    scrabble("c").should.equal(3);
+  it('should work for double digit numbers ending in 0', function() {
+    numToWords(30).should.equal("thirty");
   });
-  it('returns 4 for a word with v', function(){
-    scrabble("v").should.equal(4);
+  it("should work for triple digit numbers", function() {
+    numToWords(111).should.equal("one hundred eleven");
   });
-  it('returns 5 for a word with k', function(){
-    scrabble("k").should.equal(5);
+  it("should work for exact hundreds", function() {
+    numToWords(100).should.equal("one hundred");
   });
-   it('returns 8 for a word with x', function(){
-    scrabble("x").should.equal(8);
-  });
-  it('returns 10 for a word with z', function(){
-    scrabble("z").should.equal(10);
-  });
-  it('returns 43 for "adbfkjqq"', function(){
-    scrabble("adbfkjqq").should.equal(43);
-  });
-  it('returns 0 for an empty string', function() {
-    scrabble("").should.equal(0);
-  });
+  it("should work for large numbers", function() {
+    numToWords(56201).should.equal("fifty six thousand two hundred one");
+  })
+  it("should work for really large numbers", function() {
+    numToWords(21458794720025).should.equal("twenty one trillion four hundred fifty eight billion seven hundred ninety four million seven hundred twenty thousand twenty five")
+  })
 });
 
-describe("nPointScore", function(){
-  it('returns the score at the nth position of the regular expression object', function(){
-    nPointScore("a", /[aeiou]/gi, 1).should.equal(1);
-  });
-  it('returns the score at the nth position of the regular expression object', function(){
-    nPointScore("ae", /[aeiou]/gi, 1).should.equal(2);
-  });
-  it('returns the score at the nth position of the regular expression object', function(){
-    nPointScore("d", /[dg]/gi, 2).should.equal(2);
-  });
-});
-
-// describe('onePoint', function(){
-//   it('returns 1 for a', function(){
-//     onePoint("a").should.equal(1);
-//   });
-//   it('returns 2 for ae', function(){
-//     onePoint("ae").should.equal(2);
-//   });
-// });
-
-// describe('twoPoint', function(){
-//   it('returns 2 for a word with a d', function(){
-//     twoPoint("ada").should.equal(2);
-//   });
-//   it('returns 4 for a word with a d and a g', function(){
-//     twoPoint("dog").should.equal(4);
-//   });
-// });
-
-// describe('threePoint', function(){
-//   it('returns 3 for a word with a b', function(){
-//     threePoint("aba").should.equal(3);
-//   });
-// });
-
-
-// describe('fourPoint', function(){
-//   it('returns 4 for a word with v', function(){
-//     fourPoint("v").should.equal(4);
-//   });
-// });
-
-
-// describe('fivePoint', function(){
-//   it('returns 5 for a word with k', function(){
-//     fivePoint("k").should.equal(5);
-//   });
-// });
-
-// describe('eightPoint', function(){
-//   it('returns 8 for a word with x', function(){
-//     eightPoint("x").should.equal(8);
-//   });
-// });
-
-// describe('tenPoint', function(){
-//   it('returns 10 for a word with z', function(){
-//     tenPoint("z").should.equal(10);
-//   });
-// });
+  

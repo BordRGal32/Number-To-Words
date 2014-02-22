@@ -1,9 +1,9 @@
-/*#result {
+#result {
   display: none;
 }
 
 
-.agent {
+.scrabble {
  background: url('../images/cia_agent.jpeg') no-repeat center center fixed;
  background-size: 100%; 
 }
@@ -27,7 +27,7 @@
   color: white;
 }
 
-#encrypt {
+#wordCheck {
   text-align: center;
 }
 
@@ -38,4 +38,4 @@ button#submit-button{
 .form-label {
   color: #ff0000;
 }
-*/
+
